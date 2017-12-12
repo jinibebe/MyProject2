@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	  XML의 태그,속성,변수를 지정하는 언어 
+	  <!ELEMENT>
+	  	<member>
+	  	  <list no="a1">
+	  	    <id>jini</id>
+	  	    <pwd>1234</pwd>
+	  	    <name first="배">배지은</name>
+	  	    <hp>010-4670-2525</hp>
+	  	    <from/>
+	  	  </list>
+	  	  <list no="a2">
+	  	    <id>ayoung</id>
+	  	    <name>배아영</name>
+	  	    <home>010-6378-7741</home>
+	  	    <from/>
+	  	  </list>
+	  	</member>
+	  <!ATTLIST>
+	  <!ENTITY nbsp " ">  → &nbsp;
+	  <!ENTITY a "aa">  → &a;
+	  
+	    순서 지켜서 써야됨!
+	  + 반드시 써야됨(한번이상), 여러번 쓸 수 있음(1~)
+	  * 써도되고 안써도되는데, 여러번 쓸 수 있음(0~)
+	  ? 써도되고 안써도되는데, 한번만 쓸 수 있음(0|1)
+	  | O또는O 반드시 선택 (th|td)*(+)
+	  default 반드시 한번만 사용
+	  
+-->
+<!ELEMENT member (list+)>
+<!ELEMENT list (id,pwd?,name,(hp|home),from)>
+<!ATTLIST list no ID #REQUIRED>
+<!--
+						     		 (공백허용X)  (공백허용O)
+	 ID    		 ,        IDREF   ,   NOTATION , CDATA
+	 ==         		  =====       ========   =====
+    UNIQUE       	     FROEIGN      일반문자열      일반문자열
+    #REQUIRED : NOT NULL
+    #IMPLIED : NULL허용(써도되고 안써도됨)
+    #FIXED : DEFAULT
+    <age>aa</age>  →  숫자가들어오든, 문자가들어오든 #PCDATA로서 문자열임!! 이걸 보완하기위해서 schema사용! 데이터형 지정해줄 수 있다.
+-->
+<!ELEMENT id (#PCDATA)>		<!-- #PCDATA는 문자열이 들어온다는 뜻 -->
+<!ELEMENT pwd (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ATTLIST name first CDATA #IMPLIED>
+<!ELEMENT hp (#PCDATA)>
+<!ELEMENT home (#PCDATA)>
+<!ELEMENT from EMPTY>		<!-- 단독태그 -->
+<!ATTLIST from country CDATA #FIXED "대한민국">
+
+
+
